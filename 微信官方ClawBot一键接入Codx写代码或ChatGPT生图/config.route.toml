@@ -1,0 +1,85 @@
+language = "zh"
+data_dir = "D:/projects/test/.router-data"
+
+[log]
+level = "info"
+
+[[projects]]
+name = "test"
+admin_from = "${WEIXIN_ADMIN_FROM}"
+show_context_indicator = false
+reply_footer = false
+
+[projects.agent]
+type = "codex"
+
+[projects.agent.options]
+work_dir = "D:/projects/test"
+mode = "full-auto"
+cmd = "D:/projects/test/router.route.cmd"
+
+[[projects.platforms]]
+type = "weixin"
+
+[projects.platforms.options]
+token = "${WEIXIN_TOKEN}"
+allow_from = "${WEIXIN_ALLOW_FROM}"
+account_id = "${WEIXIN_ACCOUNT_ID}"
+base_url = "https://ilinkai.weixin.qq.com"
+
+[[commands]]
+name = "route"
+description = "Show or switch the smart routing mode / \u67e5\u770b\u6216\u5207\u6362\u667a\u80fd\u8def\u7531\u6a21\u5f0f"
+exec = "D:/projects/test/router.control.cmd {{args:status}}"
+
+[[aliases]]
+name = "\u5f53\u524d\u6a21\u5f0f"
+command = "/route status"
+
+[[aliases]]
+name = "\u56fe\u7247\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u56fe\u50cf\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u751f\u56fe\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u751f\u6210\u56fe\u7247\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u7ed8\u56fe\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u753b\u56fe\u6a21\u5f0f"
+command = "/route image"
+
+[[aliases]]
+name = "\u4ee3\u7801\u6a21\u5f0f"
+command = "/route code"
+
+[[aliases]]
+name = "\u95ee\u7b54\u6a21\u5f0f"
+command = "/route code"
+
+[[aliases]]
+name = "\u901a\u7528\u95ee\u7b54\u6a21\u5f0f"
+command = "/route code"
+
+[[aliases]]
+name = "\u81ea\u52a8\u6a21\u5f0f"
+command = "/route auto"
+
+[[aliases]]
+name = "\u667a\u80fd\u6a21\u5f0f"
+command = "/route auto"
+
+[[aliases]]
+name = "\u667a\u80fd\u8def\u7531"
+command = "/route auto"
