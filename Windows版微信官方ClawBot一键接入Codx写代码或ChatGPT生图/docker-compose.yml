@@ -1,0 +1,51 @@
+services:
+  router:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: weixin-router:local
+    container_name: weixin-router
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      TZ: "${TZ:-Asia/Shanghai}"
+      APP_ROOT: /app
+      ROUTER_CC_CONNECT_CMD: cc-connect
+      ROUTER_DATA_DIR: /app/.router-data
+      ROUTER_PROJECT_NAME: "${ROUTER_PROJECT_NAME:-test}"
+      ROUTER_ROUTE_CONFIG_FILE: /app/.router-data/config.route.toml
+      ROUTER_WEIXIN_SETUP_CONFIG: /app/.router-data/.weixin-setup.toml
+      ROUTER_WEIXIN_QR_IMAGE: /app/.router-data/weixin-qr.png
+      ROUTER_LOCAL_ENV_FILE: /app/.router-data/router.env.local.sh
+      ROUTER_STATE_FILE: /app/.router-data/.cc-router-state.json
+      ROUTER_DECISION_LOG_FILE: /app/.router-data/.cc-router-decisions.log
+      ROUTER_CACHE_DIR: /app/.router-data/.cc-router-cache
+      WEIXIN_SETUP_TIMEOUT: "${WEIXIN_SETUP_TIMEOUT:-600}"
+      WEIXIN_FORCE_REBIND: "${WEIXIN_FORCE_REBIND:-}"
+
+      WEIXIN_TOKEN: "${WEIXIN_TOKEN:-}"
+      WEIXIN_ALLOW_FROM: "${WEIXIN_ALLOW_FROM:-*}"
+      WEIXIN_ADMIN_FROM: "${WEIXIN_ADMIN_FROM:-}"
+      WEIXIN_ACCOUNT_ID: "${WEIXIN_ACCOUNT_ID:-}"
+      WEIXIN_CDN_BASE_URL: "${WEIXIN_CDN_BASE_URL:-https://novac2c.cdn.weixin.qq.com/c2c}"
+
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      ROUTER_IMAGE_API_KEY: "${ROUTER_IMAGE_API_KEY:-}"
+      ROUTER_IMAGE_ENDPOINT: "${ROUTER_IMAGE_ENDPOINT:-}"
+      ROUTER_IMAGE_PROVIDER: "${ROUTER_IMAGE_PROVIDER:-OpenAI}"
+      ROUTER_IMAGE_MODEL: "${ROUTER_IMAGE_MODEL:-gpt-image-2}"
+      ROUTER_IMAGE_API: "${ROUTER_IMAGE_API:-auto}"
+      ROUTER_IMAGE_SIZE: "${ROUTER_IMAGE_SIZE:-}"
+      ROUTER_IMAGE_QUALITY: "${ROUTER_IMAGE_QUALITY:-high}"
+      ROUTER_IMAGE_CONTEXT_TTL_MINS: "${ROUTER_IMAGE_CONTEXT_TTL_MINS:-30}"
+      ROUTER_IMAGE_CONTEXT_MAX: "${ROUTER_IMAGE_CONTEXT_MAX:-4}"
+
+      ROUTER_CODE_API_KEY: "${ROUTER_CODE_API_KEY:-}"
+      ROUTER_CODE_ENDPOINT: "${ROUTER_CODE_ENDPOINT:-}"
+      ROUTER_CODE_PROVIDER: "${ROUTER_CODE_PROVIDER:-OpenAI}"
+      ROUTER_CODE_MODEL: "${ROUTER_CODE_MODEL:-gpt-5.5}"
+      ROUTER_CODE_TEMPERATURE: "${ROUTER_CODE_TEMPERATURE:-0.2}"
+      ROUTER_CODE_MAX_OUTPUT_TOKENS: "${ROUTER_CODE_MAX_OUTPUT_TOKENS:-}"
+      ROUTER_CODE_REASONING_EFFORT: "${ROUTER_CODE_REASONING_EFFORT:-}"
+    volumes:
+      - ./.router-data:/app/.router-data
